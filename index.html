@@ -22,7 +22,7 @@ async function send() {
   document.getElementById("response").innerText = "⏳ 응답 중...";
 
   try {
-    const res = await fetch("collie2.hjs221004.workers.dev", { 
+    const res = await fetch("https://YOUR_WORKER_SUBDOMAIN.workers.dev", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message })
@@ -31,11 +31,18 @@ async function send() {
     const data = await res.json();
     console.log("Worker 응답 전체:", data);
 
-    document.getElementById("response").innerText = data.reply || "응답이 없습니다.";
+    if (data.reply) {
+      document.getElementById("response").innerText = data.reply;
+    } else if (data.error) {
+      document.getElementById("response").innerText = "⚠️ 오류 발생: " + JSON.stringify(data, null, 2);
+    } else {
+      document.getElementById("response").innerText = "⚠️ 알 수 없는 응답";
+    }
   } catch (err) {
-    document.getElementById("response").innerText = "⚠️ 오류 발생: " + err.message;
+    document.getElementById("response").innerText = "⚠️ fetch 오류: " + err.message;
   }
 }
 </script>
+
 </body>
 </html>
