@@ -21,7 +21,7 @@ async function send() {
   const message = document.getElementById("input").value;
   document.getElementById("response").innerText = "⏳ 응답 중...";
 
-  const res = await fetch("https://collie.hjs221004.workers.dev/", {
+  const res = await fetch("https://collie.hjs221004.workers.dev", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ message })
