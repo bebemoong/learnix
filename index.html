@@ -22,19 +22,16 @@ async function send() {
   document.getElementById("response").innerText = "⏳ 응답 중...";
 
   try {
-    const res = await fetch("https://collie2.hjs221004.workers.dev/", { // Cloudflare Worker URL
+    const res = await fetch("collie2.hjs221004.workers.dev", { 
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message })
     });
 
     const data = await res.json();
-    console.log(data); // 디버깅용
+    console.log("Worker 응답 전체:", data);
 
-    // Gemini 모델의 응답이 text 경로에 있을 경우
-    const reply = data.candidates?.[0]?.content?.text || "응답이 없습니다.";
-    document.getElementById("response").innerText = reply;
-
+    document.getElementById("response").innerText = data.reply || "응답이 없습니다.";
   } catch (err) {
     document.getElementById("response").innerText = "⚠️ 오류 발생: " + err.message;
   }
