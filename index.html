@@ -23,17 +23,17 @@
     const responseBox = document.getElementById('response');
     responseBox.textContent = "응답 중...";
     
-    const res = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "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"  // 🔑 여기에 본인 OpenAI API 키 입력
-      },
-      body: JSON.stringify({
-        model: "gpt-5",
-        messages: [{ role: "user", content: userMessage }]
-      })
-    });
+    const res = await fetch("https://collie.hjs221004.workers.dev/", {  // 여기에 네 Worker URL
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    model: "gpt-5",
+    messages: [{ role: "user", content: userMessage }]
+  })
+});
+
 
     const data = await res.json();
     responseBox.textContent = data.choices?.[0]?.message?.content || "응답 오류 발생";
