@@ -336,7 +336,7 @@
         </main>
     </div>
 
-    <script>
+     <script>
         // 🚨 중요: Cloudflare Worker URL을 여기에 입력해야 합니다.
         const WORKER_URL = 'https://collie2.hjs221004.workers.dev/'; // << ⚠️ Worker가 배포된 URL로 변경하세요.
 
@@ -352,6 +352,9 @@
             messageDiv.textContent = text;
             chatWindow.appendChild(messageDiv);
             chatWindow.scrollTop = chatWindow.scrollHeight; // 스크롤 하단으로 이동
+            
+            // 채팅창 활성화
+            chatWindow.classList.add('active');
         }
 
         // 챗봇 요청 처리 함수
