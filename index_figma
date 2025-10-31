@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 에이전트 학습 플랫폼</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+            background-color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        /* Background Image */
+        .background {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 0;
+        }
+        
+        .background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            max-width: 1440px;
+        }
+        
+        /* Header */
+        header {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 1rem;
+        }
+        
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            color: black;
+            white-space: nowrap;
+            letter-spacing: -1px;
+            font-size: 16px;
+        }
+        
+        .login-btn {
+            background-color: white;
+            height: 30px;
+            padding: 0 20px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #d5d5d5;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .login-btn:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .login-btn p {
+            font-family: 'Pretendard', sans-serif;
+            font-weight: 300;
+            color: black;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+        
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 10;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 1rem;
+            margin-top: -4rem;
+        }
+        
+        h1 {
+            font-family: 'Orbitron', 'Noto Sans KR', sans-serif;
+            font-weight: 700;
+            color: black;
+            text-align: center;
+            letter-spacing: -2.5px;
+            white-space: pre-wrap;
+            margin-bottom: 2rem;
+            font-size: 32px;
+            padding: 0 1rem;
+        }
+        
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 580px;
+        }
+        
+        .search-bar {
+            background-color: white;
+            height: 50px;
+            width: 100%;
+            border-radius: 100px;
+            box-shadow: 0px 1px 4.9px 0px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: 'Pretendard', sans-serif;
+            font-weight: 300;
+            color: #bebebe;
+            font-size: 14px;
+        }
+        
+        .search-bar input::placeholder {
+            color: #bebebe;
+        }
+        
+        .search-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .search-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Responsive Design */
+        @media (min-width: 640px) {
+            header {
+                padding: 2rem 2rem;
+            }
+            
+            .logo {
+                font-size: 18px;
+            }
+            
+            .login-btn p {
+                font-size: 16px;
+            }
+            
+            h1 {
+                font-size: 40px;
+            }
+            
+            .search-bar input {
+                font-size: 16px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            header {
+                padding: 3rem 3.5rem;
+            }
+            
+            .logo {
+                font-size: 20px;
+            }
+            
+            main {
+                margin-top: -6rem;
+                padding: 0 4rem;
+            }
+            
+            h1 {
+                font-size: 50px;
+                margin-bottom: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Background Image -->
+        <div class="background">
+            <!-- 이미지 URL을 실제 배경 이미지로 교체하세요 -->
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1440&h=1024&fit=crop" alt="">
+        </div>
+
+        <!-- Header -->
+        <header>
+            <p class="logo">bm.learnix</p>
+            
+            <div class="login-btn">
+                <p>Login</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <h1>AI 에이전트 학습 플랫폼</h1>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-bar">
+                    <input type="text" placeholder="대화를 시작해 보세요">
+                    
+                    <!-- Search Icon -->
+                    <div class="search-icon">
+                        <svg fill="none" preserveAspectRatio="none" viewBox="0 0 21 21">
+                            <path clip-rule="evenodd" d="M2 9.038C2 5.157 5.158 2 9.039 2C12.919 2 16.077 5.157 16.077 9.038C16.077 12.919 12.919 16.077 9.039 16.077C5.158 16.077 2 12.919 2 9.038ZM20.495 19.497L15.896 14.91C17.252 13.329 18.077 11.28 18.077 9.038C18.077 4.055 14.022 0 9.039 0C4.055 0 0 4.055 0 9.038C0 14.022 4.055 18.077 9.039 18.077C11.061 18.077 12.924 17.401 14.431 16.274L19.083 20.913L20.495 19.497Z" fill="black" fill-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
