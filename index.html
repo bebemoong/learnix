@@ -338,7 +338,7 @@
 
     <script>
         // 🚨 중요: Cloudflare Worker URL을 여기에 입력해야 합니다.
-        const WORKER_URL = 'https://collie2.hjs221004.workers.dev/'; // << ⚠️ 이 부분을 반드시 수정하세요.
+        const WORKER_URL = 'https://collie2.hjs221004.workers.dev/'; // << ⚠️ Worker가 배포된 URL로 변경하세요.
 
         const chatWindow = document.getElementById('chat-window');
         const promptInput = document.getElementById('prompt-input');
@@ -349,11 +349,7 @@
         function addMessage(text, sender) {
             const messageDiv = document.createElement('div');
             messageDiv.classList.add('message', sender);
-            
-            // 텍스트를 마크다운으로 파싱하여 HTML로 변환합니다. (선택 사항: 복잡한 챗봇 응답 시 유용)
-            // 간단한 텍스트 표시만 원하면: messageDiv.textContent = text;
-            messageDiv.innerHTML = text.replace(/\n/g, '<br>'); // 단순 줄바꿈 처리
-
+            messageDiv.textContent = text;
             chatWindow.appendChild(messageDiv);
             chatWindow.scrollTop = chatWindow.scrollHeight; // 스크롤 하단으로 이동
         }
@@ -365,10 +361,8 @@
 
             addMessage(prompt, 'user');
             promptInput.value = '';
-            
-            statusMessage.textContent = 'Gemini가 답변을 준비 중입니다...';
-            sendButton.disabled = true; 
-            promptInput.disabled = true;
+            statusMessage.textContent = 'Gemini가 생각 중입니다...';
+            sendButton.disabled = true; // 중복 전송 방지
 
             try {
                 const response = await fetch(WORKER_URL, {
@@ -384,17 +378,15 @@
                 if (response.ok) {
                     addMessage(data.text, 'gemini');
                 } else {
-                    addMessage('오류 발생: ' + (data.error || 'Worker 서버 오류'), 'gemini');
-                    console.error('Server Error:', data.error);
+                    addMessage('오류 발생: ' + (data.error || '알 수 없는 서버 오류'), 'gemini');
                 }
 
             } catch (error) {
-                addMessage('네트워크 연결 오류 또는 Worker URL이 잘못되었습니다.', 'gemini');
+                addMessage('네트워크 오류가 발생했습니다. Worker URL을 확인해 주세요.', 'gemini');
                 console.error('Fetch Error:', error);
             } finally {
                 statusMessage.textContent = '';
                 sendButton.disabled = false;
-                promptInput.disabled = false;
                 promptInput.focus();
             }
         }
